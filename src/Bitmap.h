@@ -3,6 +3,7 @@
 
 #include <string>
 #include <cstdint>
+#include <memory>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ class Bitmap {
     private:
         int width{0};
         int height{0};
+        unique_ptr<uint8_t[]> pixels{nullptr};
 
 };
 
