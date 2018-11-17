@@ -49,5 +49,8 @@ bool Bitmap::write(string filename) {
 }
 
 void Bitmap::setPixel(int x, int y, uint8_t red, uint8_t green, uint8_t blue) {
-
+    int pixelIndex = (x * 3) + (y * 3) * width;
+    pixels[pixelIndex] = blue;
+    pixels[pixelIndex + 1] = green;
+    pixels[pixelIndex + 2] = red;
 }
