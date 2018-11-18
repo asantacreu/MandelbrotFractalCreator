@@ -1,6 +1,7 @@
 #ifndef MANDELBROT_H
 #define MANDELBROT_H
 
+#include <cstdint>
 
 class Mandelbrot {
     public:
@@ -10,7 +11,7 @@ class Mandelbrot {
         Mandelbrot();
         virtual ~Mandelbrot();
 
-        static int getIterations(double x, double y);
+        static size_t getIterations(double x, double y);
 };
 
 #endif // MANDELBROT_H
