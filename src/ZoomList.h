@@ -11,10 +11,14 @@ class ZoomList {
     public:
         ZoomList(int width, int height);
 
-        void Add(const Zoom &zoom);
+        void add(const Zoom &zoom);
         pair<double, double> doZoom(int x, int y);
 
     private:
+        double xCenter{0};
+        double yCenter{0};
+        double scale{1.0};
+
         int width{0};
         int height{0};
         vector<Zoom> zooms;

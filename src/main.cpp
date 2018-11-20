@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdint>
 #include <memory>
+#include <utility>
 #include <math.h>
 #include "Bitmap.h"
 #include "Mandelbrot.h"
@@ -17,15 +18,16 @@ int main() {
     double min = 99999;
     double max = -99999;
 
-    unique_ptr<int[]> histogram(new int[Mandelbrot::MAX_ITERATIONS]{});
-    unique_ptr<size_t[]> fractal(new size_t[WIDTH * HEIGHT]{});
+    ZoomList zoomList(WIDTH, HEIGHT);
+    zoomList.add(Zoom(WIDTH/2, HEIGHT/2, 4.0/WIDTH));
+
+    unique_ptr<int[]> histogram(new int[Mandelbrot::MAX_ITERATIONS]{0});
+    unique_ptr<size_t[]> fractal(new size_t[WIDTH * HEIGHT]{0});
 
     for(int x = 0; x < WIDTH; x++) {
         for(int y = 0; y < HEIGHT; y++) {
-            double xFractal = ((x - WIDTH/2 - 200) / (HEIGHT/2.0));
-            double yFractal = ((y - HEIGHT/2) / (HEIGHT/2.0));
-
-            auto iterations = Mandelbrot::getIterations(xFractal, yFractal);
+            pair<double, double> coords = zoomList.doZoom(x, y);
+            auto iterations = Mandelbrot::getIterations(coords.first, coords.second);
             if(iterations < Mandelbrot::MAX_ITERATIONS) {
                 histogram[iterations]++;
             }

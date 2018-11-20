@@ -1,5 +1,9 @@
 #include "ZoomList.h"
 
+#include <iostream>
+
+using namespace std;
+
 ZoomList::ZoomList(int width, int height)
     : width(width),
       height(height)
@@ -7,10 +11,20 @@ ZoomList::ZoomList(int width, int height)
     //Empty
 }
 
-void ZoomList::Add(const Zoom &zoom) {
+void ZoomList::add(const Zoom &zoom) {
     zooms.push_back(zoom);
+
+    xCenter += (zoom.x - width/2) * scale;
+    yCenter += (zoom.y - height/2) * scale;
+
+    scale *= zoom.scale;
+
+    cout << xCenter << ", " << yCenter << ", " << scale << endl;
 }
 
 pair<double, double> ZoomList::doZoom(int x, int y) {
-    return pair<double, double>(0, 0);
+    double xFractal = (x - width/2) * scale + xCenter;
+    double yFractal = (y - height/2) * scale + yCenter;
+
+    return pair<double, double>(xFractal, yFractal);
 }
