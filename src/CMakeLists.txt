@@ -6,5 +6,6 @@ project(MandelbrotSetImage)
 set (SOURCE_FILES main.cpp)
 set (SOURCE_FILES ${SOURCE_FILES} Bitmap.cpp)
 set (SOURCE_FILES ${SOURCE_FILES} Mandelbrot.cpp)
+set (SOURCE_FILES ${SOURCE_FILES} ZoomList.cpp)
 
 add_executable(mandelbrotSet ${SOURCE_FILES})
