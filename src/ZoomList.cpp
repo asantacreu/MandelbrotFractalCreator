@@ -1,7 +1,5 @@
 #include "ZoomList.h"
 
-#include <iostream>
-
 using namespace std;
 
 ZoomList::ZoomList(int width, int height)
@@ -18,8 +16,6 @@ void ZoomList::add(const Zoom &zoom) {
     yCenter += (zoom.y - height/2) * scale;
 
     scale *= zoom.scale;
-
-    cout << xCenter << ", " << yCenter << ", " << scale << endl;
 }
 
 pair<double, double> ZoomList::doZoom(int x, int y) {
