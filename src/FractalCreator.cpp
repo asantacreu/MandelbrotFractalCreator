@@ -22,10 +22,11 @@ FractalCreator::~FractalCreator() {
     //Empty
 }
 
-void FractalCreator::Create() {
+void FractalCreator::run(string name) {
     calculateIteration();
     calculateTotalIterations();
     drawFractal();
+    writeBitmap(name);
 }
 
 void FractalCreator::calculateIteration() {
@@ -50,6 +51,11 @@ void FractalCreator::calculateTotalIterations() {
 }
 
 void FractalCreator::drawFractal() {
+    RGB startColor(0, 0, 20);
+    RGB endColor(255, 128, 74);
+    RGB colorDiff = (endColor - startColor);
+
+    int scale = 255/(width*height);
     for(int x = 0; x < width; x++) {
         for(int y = 0; y < height; y++) {
             uint8_t red = 0;
@@ -63,7 +69,9 @@ void FractalCreator::drawFractal() {
                     hue += ((double) histogram[i]) / totalIterations;
                 }
 
-                green = pow(255, hue);
+                red = startColor.r + colorDiff.r * hue;
+                green = startColor.g + colorDiff.g * hue;
+                blue = startColor.b + colorDiff.b * hue;
             }
 
             bitmap.setPixel(x, y, red, green, blue);

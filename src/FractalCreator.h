@@ -7,6 +7,7 @@
 #include "Zoom.h"
 #include "ZoomList.h"
 #include "Bitmap.h"
+#include "RGB.h"
 
 using namespace std;
 
@@ -15,9 +16,8 @@ class FractalCreator {
         FractalCreator(int width, int height);
         virtual ~FractalCreator();
 
-        void Create();
+        void run(string name);
         void addZoom(const Zoom& zoom);
-        void writeBitmap(string name);
 
     private:
         int width;
@@ -31,6 +31,7 @@ class FractalCreator {
         void calculateIteration();
         void calculateTotalIterations();
         void drawFractal();
+        void writeBitmap(string name);
 };
 
 #endif // FRACTALCREATOR_H

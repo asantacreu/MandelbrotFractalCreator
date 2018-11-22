@@ -8,5 +8,6 @@ set (SOURCE_FILES ${SOURCE_FILES} Bitmap.cpp)
 set (SOURCE_FILES ${SOURCE_FILES} Mandelbrot.cpp)
 set (SOURCE_FILES ${SOURCE_FILES} ZoomList.cpp)
 set (SOURCE_FILES ${SOURCE_FILES} FractalCreator.cpp)
+set (SOURCE_FILES ${SOURCE_FILES} RGB.cpp)
 
 add_executable(mandelbrotSet ${SOURCE_FILES})
