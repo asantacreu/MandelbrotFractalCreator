@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 #include "Zoom.h"
 #include "ZoomList.h"
@@ -18,6 +19,7 @@ class FractalCreator {
 
         void run(string name);
         void addZoom(const Zoom& zoom);
+        void addRange(double rangeEnd, const RGB& rgb);
 
     private:
         int width;
@@ -27,9 +29,15 @@ class FractalCreator {
         unique_ptr<int[]> histogram{nullptr};
         unique_ptr<size_t[]> fractal{nullptr};
         int totalIterations{0};
+        vector<int> ranges;
+        vector<int> rangeTotals;
+        vector<RGB> rangeColors;
+
+        bool gotFirstRange{false};
 
         void calculateIteration();
         void calculateTotalIterations();
+        void calculateRangeTotals();
         void drawFractal();
         void writeBitmap(string name);
 };
