@@ -79,10 +79,6 @@ void FractalCreator::calculateRangeTotals() {
 }
 
 void FractalCreator::drawFractal() {
-    RGB startColor(0, 0, 0);
-    RGB endColor(0, 0, 255);
-    RGB colorDiff = (endColor - startColor);
-
     for(int x = 0; x < width; x++) {
         for(int y = 0; y < height; y++) {
             uint8_t red = 0;
@@ -91,19 +87,41 @@ void FractalCreator::drawFractal() {
 
             size_t iterations = fractal[x + y * width];
             if(iterations != Mandelbrot::MAX_ITERATIONS) {
-                double hue = 0.0;
-                for(size_t i = 0; i <= iterations; i++) {
-                    hue += ((double) histogram[i]) / totalIterations;
-                }
+                size_t rangeIndex = getRange(iterations);
+                RGB& startColor = rangeColors[rangeIndex];
+                RGB& endColor = rangeColors[rangeIndex + 1];
+                RGB colorDiff = (endColor - startColor);
 
-                red = startColor.r + colorDiff.r * hue;
-                green = startColor.g + colorDiff.g * hue;
-                blue = startColor.b + colorDiff.b * hue;
+                int startIterations = ranges[rangeIndex];
+                int totalRangeIterations = rangeTotals[rangeIndex];
+
+                double totalPixels = 0.0;
+                for(size_t i = startIterations; i <= iterations; i++) {
+                    totalPixels += (double) histogram[i];
+                }
+                totalPixels /= totalRangeIterations;
+
+                red = startColor.r + colorDiff.r * totalPixels;
+                green = startColor.g + colorDiff.g * totalPixels;
+                blue = startColor.b + colorDiff.b * totalPixels;
             }
 
             bitmap.setPixel(x, y, red, green, blue);
         }
     }
+}
+
+size_t FractalCreator::getRange(int iterations) const {
+    size_t rangeIndex = 0;
+
+    for(size_t f = 0; f < ranges.size(); f++) {
+        if(iterations <= ranges[f + 1]) {
+            rangeIndex = f;
+            break;
+        }
+    }
+
+    return rangeIndex;
 }
 
 void FractalCreator::writeBitmap(string name) {

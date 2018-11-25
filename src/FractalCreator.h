@@ -39,6 +39,7 @@ class FractalCreator {
         void calculateTotalIterations();
         void calculateRangeTotals();
         void drawFractal();
+        size_t getRange(int iterations) const;
         void writeBitmap(string name);
 };
 
