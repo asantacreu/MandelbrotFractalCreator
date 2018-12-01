@@ -1,13 +1,17 @@
 cmake_minimum_required(VERSION 3.12.4)
+
+project(MandelbrotFractalCreator)
+
 set (CMAKE_CXX_STANDARD 11)
 
-project(MandelbrotSetImage)
+set (SOURCES
+     main.cpp
+     Bitmap.cpp
+     Mandelbrot.cpp
+     ZoomList.cpp
+     FractalCreator.cpp
+     RGB.cpp
+)
 
-set (SOURCE_FILES main.cpp)
-set (SOURCE_FILES ${SOURCE_FILES} Bitmap.cpp)
-set (SOURCE_FILES ${SOURCE_FILES} Mandelbrot.cpp)
-set (SOURCE_FILES ${SOURCE_FILES} ZoomList.cpp)
-set (SOURCE_FILES ${SOURCE_FILES} FractalCreator.cpp)
-set (SOURCE_FILES ${SOURCE_FILES} RGB.cpp)
 
-add_executable(mandelbrotSet ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCES})
