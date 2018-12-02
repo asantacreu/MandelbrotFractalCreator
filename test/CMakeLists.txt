@@ -41,6 +41,12 @@ link_directories(${GOOGLE_TEST_INSTALLATION_PATH}/lib)
 set (SOURCES
      main.cpp
      BitmapFileHeaderUnitTest.cpp
+     ZoomListUnitTest.cpp
+)
+
+set(SOURCES
+    ${SOURCES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/ZoomList.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
