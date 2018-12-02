@@ -40,9 +40,12 @@ link_directories(${GOOGLE_TEST_INSTALLATION_PATH}/lib)
 
 set (SOURCES
      main.cpp
+     BitmapFileHeaderUnitTest.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 
 add_dependencies(${PROJECT_NAME} ${GOOGLE_TEST})
 
