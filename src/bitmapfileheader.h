@@ -22,6 +22,10 @@ class BitmapFileHeader{
             return fileSize;
         }
 
+        int32_t getDataOffset() const{
+            return dataOffset;
+        }
+
     private:
         char header[2]{'B', 'M'};
         int32_t fileSize;
